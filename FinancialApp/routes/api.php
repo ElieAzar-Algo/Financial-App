@@ -23,11 +23,14 @@ Route::get('/userno', function (Request $request) {
 });
 
 
+
  Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/user', function (Request $request) {
         return "hi";
     });
-   Route::post('/users','UsersController@store');
+    Route::post('/users','UsersController@store');
+    Route::get('/user/{id}','UsersController@show');
+    Route::get('/users','UsersController@index');
 }); 
 
 
