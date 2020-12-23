@@ -22,8 +22,13 @@ Route::get('/userno', function (Request $request) {
     return "Not authenticated";
 });
 
+
  Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/user', function (Request $request) {
         return "hi";
     });
+   Route::post('/users','UsersController@store');
 }); 
+
+
+
