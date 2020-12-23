@@ -14,9 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::post('/register', 'AuthController@register');
+Route::post('/login', 'AuthController@login');
+Route::post('/logout', 'AuthController@logout');
+
+Route::get('/userno', function (Request $request) {
+    return "Not authenticated";
 });
-Route::post('/users','UsersController@store');
-Route::get('/user/{id}','UsersController@show');
-Route::get('/users','UsersController@index');
+
+
+
+ Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('/user', function (Request $request) {
+        return "hi";
+    });
+    Route::post('/users','UsersController@store');
+    Route::get('/user/{id}','UsersController@show');
+    Route::get('/users','UsersController@index');
+}); 
+
+
+
