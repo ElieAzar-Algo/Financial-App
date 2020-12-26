@@ -15,14 +15,13 @@ class AuthController extends Controller
          ]);
 
         $token = auth()->login($user);
-
         return $this->respondWithToken($token);
     }
 
     public function login()
     {
         $credentials = request(['email', 'password']);
-
+        $credentials["password"] =  User::saltingAndPeppering($credentials["password"]);
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -45,4 +44,7 @@ class AuthController extends Controller
             'expires_in'   => auth()->factory()->getTTL() * 60
         ]);
     }
+
+    //reset password
+
 }
