@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-     protected $table="users";//
+    protected $table="users";//
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,7 +20,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','profile_image_link','bio'
     ];
-
+    
+    
+    public static function saltingAndPeppering($password){
+        $SALT = "rgeerg4g54rge4";
+        $PEPPER = "dsfs44d5f4sffdse";
+        return $SALT.$password.$PEPPER;
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,4 +44,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+    public function setPasswordAttribute($password)
+    {
+        if ( !empty($password) ) {
+            $this->attributes['password'] = bcrypt(SELF::saltingAndPeppering($password),array('rounds'=>14));
+        }
+    }    
 }

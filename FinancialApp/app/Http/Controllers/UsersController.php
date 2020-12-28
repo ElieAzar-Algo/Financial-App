@@ -15,6 +15,10 @@ class UsersController extends Controller
     public function index()
     {
         $users=User::all();
+        return response()->json([
+            'status'=>200,
+            'user'=>$users
+        ]);
         
         
     }
@@ -39,6 +43,10 @@ class UsersController extends Controller
         $user->password=$data['password'];
        
         $user->save();
+        return response()->json ([
+            'status'=>200,
+            'user'=>$user
+        ]);
     }
 
     /**
@@ -47,9 +55,15 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user=User::where('id',$id)->first();
+        
+        return response()->json([
+            'status'=>200,
+            'user'=>$user
+        ]); 
+        
     }
 
     /**
@@ -60,7 +74,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        
     }
 
     /**
@@ -70,9 +84,15 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $data=$request->all();
+        $user=User::where('id',$id)->first();
+        $user->name=$data['name'];
+        $user->email=$data['email'];
+        $user->password=$data['password'];
+        $user->save();
+
     }
 
     /**
