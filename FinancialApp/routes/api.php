@@ -31,6 +31,12 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/users','UsersController@store');
     Route::get('/user/{id}','UsersController@show');
     Route::get('/users','UsersController@index');
+
+    //Category Routes
+    Route::post('/category','CategoryController@create');
+    Route::get('/category','CategoryController@retrieve');
+    Route::put('/category/{id}','CategoryController@update');
+    Route::delete('/category/{id}','CategoryController@delete');
 }); 
 
 
