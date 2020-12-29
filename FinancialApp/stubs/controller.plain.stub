@@ -4,24 +4,72 @@ namespace {{ namespace }};
 
 use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Exception;
+use App\{{ class }};
 
 class {{ class }} extends Controller
 {
-    public function create(Request $request){
+     public function create(Request $request){
+     
+        try{
+        //
+        {{ class }}::create(array(
+            //
+        ));
+
+        return response()->json([
+            'error' => false,
+            'message' => "The {{ class }} has been added successfully"
+        ],201);
+
+    }catch (\Illuminate\Database\QueryException $exception) {
+            $errorInfo = $exception->errorInfo;
+            return response()->json([
+                'error' => true,
+                'message' => "Internal error occured",
+                'errormessage' => $errorInfo
+            ],500);
+        }
+    }
+
+   public function retrieve(Request $request){
+      try{
+          $X = {{ class }}::paginate();
+          return response()->json([
+              'error'=>false,
+              'X'=>$X
+          ],200);
+      }
+      catch(\Illuminate\Database\QueryException $exception){
+        $errorInfo = $exception->errorInfo;
+        return response()->json([
+            'error' => true,
+            'message' => "Internal error occured"
+        ],500);
+      }
 
     }
 
-    public function retrieve(Request $request){
-
-    }
-
-    public function update(Request $request){
-
-    }
-
-    public function delete(Request $request){
-
+    public function update(Request $request,$id){
+       try{
+           $X = {{ class }}::where('id', '=', $id)->first();
+           //$X->name = $request['name'];
+           $X->save(); 
+           return response()->json([
+            'error'=>false,
+            'message'=>'The {{ class }} has been updated successfully',
+            'X'=>$X
+           ],200);
+       }
+      catch(\Illuminate\Database\QueryException $exception){
+        $errorInfo = $exception->errorInfo;
+        return response()->json([
+            'error' => true,
+            'message' => "Internal error occured"
+        ],500);
+       }
     }
 
 }
+
+
