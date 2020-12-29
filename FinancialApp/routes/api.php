@@ -37,6 +37,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/category','CategoryController@retrieve');
     Route::put('/category/{id}','CategoryController@update');
     Route::delete('/category/{id}','CategoryController@delete');
+
+    //Profit Goal
+    Route::post('/goal','ProfitGoalController@create');
+    Route::get('/goal','ProfitGoalController@retrieve');
+    Route::get('/goal/{id}','ProfitGoalController@retreiveById');
+    Route::put('/goal/{id}','ProfitGoalController@update');
+    Route::delete('/goal/{id}','ProfitGoalController@delete');
 }); 
 
 
