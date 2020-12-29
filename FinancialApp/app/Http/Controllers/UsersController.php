@@ -20,6 +20,7 @@ class UsersController extends Controller
             'user'=>$users
         ]);
         
+        
     }
 
     
