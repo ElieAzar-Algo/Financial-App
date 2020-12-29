@@ -33,6 +33,20 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/users','UsersController@store');
     Route::get('/user/{id}','UsersController@show');
     Route::get('/users','UsersController@index');
+
+    //Category Routes
+    Route::post('/category','CategoryController@create');
+    Route::get('/category','CategoryController@retrieve');
+    Route::put('/category/{id}','CategoryController@update');
+    Route::delete('/category/{id}','CategoryController@delete');
+
+    //Profit Goal
+    Route::post('/goal','ProfitGoalController@create');
+    Route::get('/goal','ProfitGoalController@retrieve');
+    Route::get('/goal/{id}','ProfitGoalController@retreiveById');
+    Route::put('/goal/{id}','ProfitGoalController@update');
+    Route::delete('/goal/{id}','ProfitGoalController@delete');
+
     Route::post('/incomes','IncomeController@store');
     Route::Get('/incomesshow/{id}','IncomeController@show');
     Route::Patch('/incomesupdate/{id}','IncomeController@update');
@@ -41,6 +55,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::Get('/expensesshow/{id}','ExpenseController@show');
     Route::Patch('/expensesupdate/{id}','ExpenseController@update');
      Route::Delete('/expensesdestroy/{id}','ExpenseController@destroy');
+
 }); 
 
 
