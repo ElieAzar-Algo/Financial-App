@@ -24,12 +24,11 @@ Route::get('/userno', function (Request $request) {
 //Route::post('/users','UsersController@store');
 
 
-
-
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/user', function (Request $request) {
         return "hi";
     });
+    
     Route::post('/users','UsersController@store');
     Route::get('/user/{id}','UsersController@show');
     Route::get('/users','UsersController@index');
@@ -54,9 +53,5 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/expenses','ExpenseController@store');
     Route::Get('/expensesshow/{id}','ExpenseController@show');
     Route::Patch('/expensesupdate/{id}','ExpenseController@update');
-     Route::Delete('/expensesdestroy/{id}','ExpenseController@destroy');
-
+    Route::Delete('/expensesdestroy/{id}','ExpenseController@destroy');
 }); 
-
-
-
