@@ -47,14 +47,14 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/goal/{id}','ProfitGoalController@update');
     Route::delete('/goal/{id}','ProfitGoalController@delete');
 
-    Route::post('/incomes','IncomeController@store');
-    Route::Get('/incomesshow/{id}','IncomeController@show');
-    Route::Patch('/incomesupdate/{id}','IncomeController@update');
-    Route::Delete('/incomesdestroy/{id}','IncomeController@destroy');
-    Route::post('/expenses','ExpenseController@store');
-    Route::Get('/expensesshow/{id}','ExpenseController@show');
-    Route::Patch('/expensesupdate/{id}','ExpenseController@update');
-     Route::Delete('/expensesdestroy/{id}','ExpenseController@destroy');
+    Route::post('/income','IncomeController@store');
+    Route::Get('/income/{id}','IncomeController@show');
+    Route::Patch('/income/{id}','IncomeController@update');
+    Route::Delete('/income/{id}','IncomeController@destroy');
+    Route::post('/expense','ExpenseController@store');
+    Route::Get('/expense/{id}','ExpenseController@show');
+    Route::Patch('/expense/{id}','ExpenseController@update');
+     Route::Delete('/expense/{id}','ExpenseController@destroy');
 
 }); 
 
