@@ -12,5 +12,8 @@ protected $table="incomes";
 protected $fillable = [
     "id ",	"name", 	"description" ,	"amount",	"created_at" ,	"updated_at" ,	"date" ,	"category_id", 	"type_id" ,	"start_date" ,	"end_date" 
 ];
-
+public function type()
+{
+    return $this->hasOne('App\Type');
+}
 }

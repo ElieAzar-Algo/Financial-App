@@ -15,7 +15,9 @@ class SeedTypesTable extends Migration
     {
         $types = array(
             array("name"=>"fixed"),
-            array("name"=>"recurring")
+            array("name"=>"weekly"),
+            array("name"=>"monthly"),
+            array("name"=>"yearly")
         );
         DB::table('types')->insert($types);
     }
