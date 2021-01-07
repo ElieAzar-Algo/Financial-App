@@ -53,7 +53,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get("/report/income",'ReportController@getIncomeData');
     Route::get("/report/expense",'ReportController@getExpenseData');
 
-    Route::get('/incomes','IncomeController@index');
+    Route::get('/income','IncomeController@index');
     Route::post('/income','IncomeController@store');
     Route::Get('/income/{id}','IncomeController@show');
     Route::Patch('/income/{id}','IncomeController@update');
