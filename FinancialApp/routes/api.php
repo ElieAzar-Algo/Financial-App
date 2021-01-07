@@ -59,7 +59,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::Patch('/income/{id}','IncomeController@update');
     Route::Delete('/income/{id}','IncomeController@destroy');
 
-    Route::get('/expenses','ExpenseController@index');
+    Route::get('/expense','ExpenseController@index');
     Route::post('/expense','ExpenseController@store');
     Route::Get('/expense/{id}','ExpenseController@show');
     Route::Patch('/expense/{id}','ExpenseController@update');
