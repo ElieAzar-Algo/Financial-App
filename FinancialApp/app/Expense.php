@@ -14,4 +14,8 @@ protected $fillable = [
     "id ",	"name", 	"description" ,	"amount" ,	"date" ,	"category_id", 	"type_id" ,	"start_date" ,	"end_date" 
 ];
 
+public function type()
+{
+    return $this->hasOne('App\Type');
+}
 }
