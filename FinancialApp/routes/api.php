@@ -19,17 +19,18 @@ Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 
 Route::get('/userno', function (Request $request) {
-    return "Not authenticated";
+    $date1 = new Carbon\Carbon("2021-5-6");
+    $date2 = $date1->addWeek();
+    return $date2;
 });
 //Route::post('/users','UsersController@store');
 
 
-
-
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/user', function (Request $request) {
-        return "hi";
+     
     });
+    
     Route::post('/users','UsersController@store');
     Route::get('/user/{id}','UsersController@show');
     Route::get('/users','UsersController@index');
@@ -47,19 +48,23 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/goal/{id}','ProfitGoalController@update');
     Route::delete('/goal/{id}','ProfitGoalController@delete');
 
-    Route::get('/incomes','IncomeController@index');
+
+    //Income Reports
+    Route::get("/report/income",'ReportController@getIncomeData');
+    Route::get("/report/expense",'ReportController@getExpenseData');
+
+    Route::get('/income','IncomeController@index');
     Route::post('/income','IncomeController@store');
     Route::Get('/income/{id}','IncomeController@show');
     Route::Patch('/income/{id}','IncomeController@update');
     Route::Delete('/income/{id}','IncomeController@destroy');
 
-    Route::get('/expenses','ExpenseController@index');
+    Route::get('/expense','ExpenseController@index');
     Route::post('/expense','ExpenseController@store');
     Route::Get('/expense/{id}','ExpenseController@show');
     Route::Patch('/expense/{id}','ExpenseController@update');
-     Route::Delete('/expense/{id}','ExpenseController@destroy');
+    Route::Delete('/expense/{id}','ExpenseController@destroy');
 
 }); 
-
 
 
